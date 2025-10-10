@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print step - Checked out code
+        run: echo "✅ Code checked out successfully."
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Print step - Node.js set up
+        run: echo "🛠️ Node.js 18 set up successfully."
+
+      - name: Install dependencies
+        run: |
+          echo "📦 Installing dependencies..."
+          npm install
+
+      - name: Print step - Dependencies installed
+        run: echo "📦 Dependencies installed successfully."
+
+      - name: Run tests
+        run: |
+          echo "🧪 Running tests..."
+          npm test
+
+      - name: Print step - Tests completed
+        run: echo "✅ Tests completed."
